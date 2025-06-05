@@ -1,0 +1,66 @@
+:root {
+  --bg-color: #1e1e2f;
+  --text-primary: #ffffff;
+  --text-secondary: #c0c0cc;
+  --input-border: #444459;
+  --input-bg: #2a2a3d;
+  --primary-action-color: #3b82f6;
+  --primary-action-hover-color: #2563eb;
+  --primary-action-text-color: #ffffff;
+}
+
+
+.create-buy-form {
+  background-color: var(--input-bg);
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+
+.create-buy-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.create-buy-form label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.create-buy-form input,
+.create-buy-form select,
+.create-buy-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  background-color: var(--input-bg, #f9f9f9);
+  color: var(--text-primary);
+}
+
+.create-buy-form button {
+  background-color: var(--primary-action-color, #2563eb);
+  color: var(--primary-action-text-color, #fff);
+  padding: 0.75rem;
+  font-weight: 500;
+  border-radius: 12px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-buy-form button:hover {
+  background-color: var(--primary-action-hover-color, #1e40af);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}

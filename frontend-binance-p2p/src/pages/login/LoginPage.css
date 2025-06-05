@@ -1,0 +1,170 @@
+/* src/pages/auth/LoginPage.css */
+
+/* Usaremos las mismas variables que en HomePage.css para consistencia */
+/* Si este archivo no puede acceder a :root de otro, puedes redeclararlas o importarlas */
+:root {
+  --primary-bg: #181a20;
+  --card-bg: #252830; /* Un gris oscuro ligeramente más claro para la tarjeta */
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a3af;
+  --accent-color: #fcd34d; /* Amarillo Binance */
+  --border-color: #374151;
+  --input-bg: #1f2937; /* Fondo de inputs similar al navbar */
+  --input-border-focus: var(--accent-color);
+  --negative-color: #f6465d;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--primary-bg); /* Asegura que el fondo sea oscuro globalmente para esta vista */
+}
+
+.login-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background-color: var(--primary-bg);
+  font-family: var(--font-main);
+}
+
+.login-card {
+  background-color: var(--card-bg);
+  padding: 2rem 2.5rem; /* Más padding para un look espacioso */
+  border-radius: 12px; /* Bordes más redondeados */
+  box-shadow: 0 8px 25px var(--shadow-color);
+  width: 100%;
+  max-width: 420px; /* Ancho máximo para el formulario */
+  color: var(--text-primary);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.app-title-main {
+  color: var(--accent-color);
+}
+
+.app-title-sub {
+  color: var(--text-secondary);
+  font-size: 0.8em; /* Relativo al .app-title */
+  font-weight: 500;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.5rem; /* Espacio después del app-title si está */
+}
+
+.error-banner {
+  background-color: rgba(var(--negative-color-rgb, 246, 70, 93), 0.1); /* Usar RGB para opacidad */
+  color: var(--negative-color);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--negative-color);
+  text-align: center;
+  font-size: 0.9rem;
+}
+/* Si no puedes usar --negative-color-rgb, usa un color sólido: */
+/* .error-banner {
+  background-color: #5d232a;
+  color: var(--negative-color);
+  ...
+} */
+
+
+.login-form .input-group {
+  margin-bottom: 1.25rem;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  padding: 0.85rem 1rem; /* Buen padding interno */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.3); /* Sombra de foco con el color de acento */
+}
+
+.submit-button {
+  width: 100%;
+  background-color: var(--accent-color);
+  color: #111; /* Texto oscuro para buen contraste con el amarillo */
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 0.5rem; /* Espacio antes del botón */
+}
+
+.submit-button:hover {
+  background-color: #e0b020; /* Un amarillo ligeramente más oscuro al pasar el mouse */
+}
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+.alternative-action {
+  text-align: center;
+  margin-top: 1.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.alternative-action .link-highlight {
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.alternative-action .link-highlight:hover {
+  text-decoration: underline;
+  color: #fff; /* Resaltar más el link al pasar el mouse */
+}
+
+/* Para la opacidad en error-banner si --negative-color-rgb no está disponible globalmente */
+/* Es mejor definir --negative-color-rgb donde defines --negative-color: */
+/* :root { ... --negative-color: #f6465d; --negative-color-rgb: 246, 70, 93; ... } */
+/* Si no es posible, define un color de fondo sólido para .error-banner como se comentó arriba. */

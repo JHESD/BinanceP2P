@@ -1,0 +1,297 @@
+/* styles/WalletList.css */
+
+/* Asegúrate que las variables globales de color y fuente estén disponibles */
+/* Si no, puedes redeclarar las necesarias aquí o importarlas. */
+/* :root { ... tus variables ... } */
+
+.wallets-page-container {
+  padding: 1.5rem; /* Espaciado general de la página */
+  background-color: var(--primary-bg, #181a20); /* Fondo oscuro de la página */
+  color: var(--text-primary, #f0f0f0);
+  min-height: calc(100vh - var(--nav-height, 68px)); /* Altura mínima, descontando el navbar */
+  font-family: var(--font-main, 'Segoe UI', sans-serif);
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color, #fcd34d);
+  text-align: center; /* Opcional */
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color, #374151); /* Opcional */
+}
+
+/* Rejilla de Billeteras (Tailwind se encarga de las columnas y gap) */
+.wallets-grid {
+  /* Clases de Tailwind: grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 */
+  /* Ejemplo: si no usaras Tailwind para esto: */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; */
+}
+
+/* Tarjeta de Billetera Individual */
+.wallet-card, .add-wallet-card {
+  background-color: var(--card-bg, #252830);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 220px; /* Altura mínima para consistencia */
+  justify-content: space-between; /* Distribuye el contenido verticalmente */
+}
+
+.wallet-card:hover, .add-wallet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.wallet-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.wallet-currency-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--accent-color, #fcd34d);
+  color: var(--card-bg, #252830); /* Texto oscuro sobre fondo de acento */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  flex-shrink: 0; /* Evita que el icono se encoja */
+}
+/* Puedes añadir estilos específicos por ticker si tienes iconos: */
+/* .wallet-currency-icon.btc { background-image: url(...); } */
+
+.wallet-currency-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary, #f0f0f0);
+  word-break: break-word;
+}
+
+.wallet-card-body {
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Permite que esta sección crezca */
+}
+
+.wallet-balance-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #a0a3af);
+  margin-bottom: 0.25rem;
+}
+
+.wallet-balance-amount {
+  font-size: 2rem; /* Tamaño prominente para el saldo */
+  font-weight: 700;
+  color: var(--text-primary, #f0f0f0);
+  display: flex;
+  align-items: baseline; /* Alinea el ticker con la base del número */
+  word-break: break-all; /* Si el número es muy largo */
+}
+
+.wallet-currency-ticker {
+  font-size: 0.8em; /* Relativo al tamaño del .wallet-balance-amount */
+  color: var(--text-secondary, #a0a3af);
+  margin-left: 0.5rem;
+  font-weight: 500;
+}
+
+.wallet-card-footer {
+  text-align: right;
+}
+
+.wallet-view-details {
+  font-size: 0.875rem;
+  color: var(--accent-color, #fcd34d);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Tarjeta para "Agregar Nueva Billetera" */
+.add-wallet-card {
+  border: 2px dashed var(--border-color, #374151);
+  background-color: rgba(var(--card-bg-rgb, 37, 40, 48), 0.5); /* Fondo más sutil, requiere --card-bg-rgb */
+  /* Si no tienes --card-bg-rgb, usa un color sólido ligeramente diferente: */
+  /* background-color: #2a2d35; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-secondary, #a0a3af);
+}
+.add-wallet-card:hover {
+  border-color: var(--accent-color, #fcd34d);
+  color: var(--accent-color, #fcd34d);
+}
+
+.add-wallet-icon {
+  font-size: 3rem; /* Icono grande */
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.add-wallet-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+/* --- Estilos del Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Por encima de todo, excepto quizás otros modales */
+  padding: 1rem; /* Para que el modal no toque los bordes en pantallas pequeñas */
+}
+
+.modal-content {
+  background-color: var(--card-bg, #252830);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 500px; /* Ancho máximo del modal */
+  color: var(--text-primary, #f0f0f0);
+  animation: modal-fade-in 0.3s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color, #374151);
+  padding-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-color, #fcd34d);
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #a0a3af);
+  font-size: 2rem; /* Tamaño del 'X' */
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.modal-close-button:hover {
+  color: var(--text-primary, #f0f0f0);
+}
+
+.modal-body {
+  margin-bottom: 1.5rem;
+}
+
+/* Reutilizar estilos de input-group, input-label, form-input de Login/Register */
+/* Si no están en un CSS global, cópialos aquí: */
+.input-group { margin-bottom: 1.25rem; }
+.input-label { display: block; font-size: 0.875rem; color: var(--text-secondary, #a0a3af); margin-bottom: 0.4rem; font-weight: 500; }
+.form-input { width: 100%; background-color: var(--input-bg, #1f2937); color: var(--text-primary, #f0f0f0); padding: 0.85rem 1rem; border: 1px solid var(--border-color, #374151); border-radius: 6px; font-size: 1rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-input::placeholder { color: var(--text-secondary, #a0a3af); opacity: 0.7; }
+.form-input:focus { outline: none; border-color: var(--input-border-focus, var(--accent-color)); box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb, 252, 211, 77), 0.3); } /* Necesitas --accent-color-rgb */
+select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a3af'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem; }
+
+
+/* Banner de error específico para el modal */
+.error-banner-modal {
+  background-color: rgba(var(--negative-color-rgb, 246, 70, 93), 0.1);
+  color: var(--negative-color, #f6465d);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--negative-color, #f6465d);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end; /* Alinea botones a la derecha */
+  gap: 0.75rem; /* Espacio entre botones */
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color, #374151);
+}
+
+.modal-button { /* Clase base para botones del modal si necesitas un padding común */
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  /* submit-button y button-secondary ya tienen muchos estilos */
+}
+
+/* Botón secundario (Cancelar) */
+.button-secondary { /* Similar al logout button, pero más genérico */
+  background-color: transparent;
+  border: 1px solid var(--border-color, #374151);
+  color: var(--text-secondary, #a0a3af);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.button-secondary:hover {
+  background-color: var(--border-color, #374151);
+  color: var(--text-primary, #f0f0f0);
+}
+
+/* Reutilizar .submit-button para "Crear" */
+/* Si el submit-button global es muy específico, puedes crear .button-primary aquí */
+.submit-button:disabled { /* Estilo para botón deshabilitado */
+    background-color: var(--border-color, #374151);
+    color: var(--text-secondary, #a0a3af);
+    cursor: not-allowed;
+    border-color: var(--border-color, #374151);
+}
+.submit-button:disabled:hover {
+    background-color: var(--border-color, #374151); /* Evita cambio de color en hover */
+    color: var(--text-secondary, #a0a3af);
+}
+
+/* --- Media Queries para Responsividad (Ajustar breakpoints según necesidad) --- */
+@media (max-width: 768px) { /* md */
+  .wallets-page-container { padding: 1rem; }
+  .page-main-title { font-size: 1.75rem; }
+  .wallet-card, .add-wallet-card { padding: 1.25rem; min-height: 200px; }
+  .wallet-currency-name { font-size: 1.25rem; }
+  .wallet-balance-amount { font-size: 1.75rem; }
+  .wallet-currency-icon { width: 40px; height: 40px; font-size: 1.2rem; margin-right: 0.75rem; }
+
+  .modal-content { padding: 1.5rem; margin: 0.5rem; /* Para que no pegue a los bordes en móvil */ }
+  .modal-title { font-size: 1.25rem; }
+  .modal-footer { flex-direction: column-reverse; /* Botones en columna, el principal arriba */ gap: 0.75rem; }
+  .modal-footer .modal-button { width: 100%; } /* Botones ocupan todo el ancho */
+}
+
+@media (max-width: 640px) { /* sm */
+  /* Aquí Tailwind aplicaría grid-cols-1 por defecto si configuraste grid-cols-1 sm:grid-cols-2 ... */
+  .page-main-title { text-align: left; border-bottom: none; padding-bottom: 0; }
+}

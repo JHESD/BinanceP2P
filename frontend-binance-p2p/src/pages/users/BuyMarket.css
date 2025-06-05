@@ -1,0 +1,164 @@
+/* src/components/market/BuyMarket.css o src/styles/BuyMarket.css - MODO OSCURO */
+
+/* --- Variables (Heredadas/Consistentes) --- */
+:root {
+  /* Heredadas de los estilos anteriores (WalletDetail, WalletList) */
+  --app-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --page-bg: #181a20;
+  --card-bg: #252830;
+  --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  --card-hover-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  --card-border-color: #374151;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a3af;
+  --text-tertiary: #888c99;
+  --accent-yellow: #fcd34d;
+
+  /* Nuevas variables para colores de acción primarios (azul) */
+  --primary-action-color: #2563eb; /* Tailwind blue-600 */
+  --primary-action-hover-color: #1d4ed8; /* Tailwind blue-700 */
+  --primary-action-text-color: #ffffff; /* Texto blanco para botones azules */
+
+  --nav-height: 68px; /* Asumiendo una altura de navbar */
+}
+
+/* --- Contenedor Principal de BuyMarket --- */
+.buy-market-container {
+  padding: 2rem;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  min-height: calc(100vh - var(--nav-height, 68px));
+  font-family: var(--app-font);
+}
+
+/* --- Contenedor del Botón "Crear Anuncio" --- */
+.create-ad-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+/* --- Botón Base --- */
+.button-base {
+  color: var(--primary-action-text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px; /* Equivalente a rounded-xl */
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex; /* Para alinear íconos y texto */
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* Espacio entre ícono y texto */
+  text-decoration: none; /* Por si se usa en un <a> */
+}
+
+/* --- Botón de Acción Primario (Azul) --- */
+.button-primary {
+  background-color: var(--primary-action-color);
+}
+.button-primary:hover {
+  background-color: var(--primary-action-hover-color);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); /* Sombra sutil del color del botón */
+}
+
+/* --- Rejilla de Anuncios --- */
+.ads-grid {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta minmax según el contenido */
+  /* Las clases de Tailwind ya gestionan esto. Si las quitas, descomenta y ajusta. */
+  gap: 1.5rem; /* Tailwind gap-4 es 1rem, gap-6 es 1.5rem. Ajusta si es necesario. */
+}
+
+/* --- Tarjeta de Anuncio Individual --- */
+.ad-card {
+  background-color: var(--card-bg);
+  border-radius: 16px; /* Tailwind rounded-2xl */
+  padding: 1.5rem; /* Tailwind p-6 (1.5rem) o p-4 (1rem) */
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  min-height: 280px; /* Altura mínima para consistencia visual */
+}
+
+.ad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* --- Contenido Superior de la Tarjeta de Anuncio --- */
+.ad-card-content {
+  flex-grow: 1; /* Permite que esta sección crezca para empujar el botón hacia abajo */
+  margin-bottom: 1rem; /* Espacio antes del botón si el contenido es corto */
+}
+
+.ad-currency-name {
+  font-size: 1.3rem; /* Tailwind text-xl es 1.25rem, ajustado */
+  font-weight: 600; /* Tailwind font-semibold */
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  word-break: break-word; /* Para nombres de moneda largos */
+}
+
+.ad-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  /* Limitar número de líneas para descripciones largas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Muestra hasta 3 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ad-details {
+  font-size: 0.85rem; /* Tailwind text-sm es 0.875rem */
+  color: var(--text-tertiary);
+  margin-top: 0.5rem; /* Tailwind mt-2 */
+}
+.ad-details strong { /* Para resaltar etiquetas como "Precio:" */
+    color: var(--text-secondary); /* Un poco más de énfasis para la etiqueta */
+    font-weight: 500;
+}
+
+.ad-payment-image {
+  margin-top: 1rem; /* Tailwind mt-2, ajustado */
+  width: 100%;
+  max-height: 8rem; /* Tailwind max-h-32 */
+  object-fit: contain; /* Mantiene la relación de aspecto */
+  border-radius: 8px; /* Tailwind rounded */
+  background-color: rgba(var(--text-primary-rgb, 240, 240, 240), 0.05); /* Fondo sutil si la imagen tiene transparencia */
+  /* Asegúrate de definir --text-primary-rgb: 240, 240, 240; en :root si no está */
+}
+:root { /* Añade si no existe */
+    --text-primary-rgb: 240, 240, 240;
+}
+
+
+/* --- Botón "Ver Detalle" en la Tarjeta --- */
+.ad-view-details-button {
+  margin-top: auto; /* Empuja el botón al final si .ad-card-content no ocupa todo el espacio */
+  /* Hereda estilos de .button-base y .button-primary */
+}
+.ad-view-details-button .lucide { /* Estilo para el ícono lucide */
+  width: 1.125rem; /* Tailwind w-5 es 1.25rem, h-5 es 1.25rem. Ajustado. */
+  height: 1.125rem;
+}
+
+/* --- Mensaje cuando no hay anuncios --- */
+.no-ads-message {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--card-bg);
+  border: 1px dashed var(--card-border-color);
+  border-radius: 12px;
+  margin-top: 2rem;
+}

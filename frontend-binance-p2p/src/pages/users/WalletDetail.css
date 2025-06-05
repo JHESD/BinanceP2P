@@ -1,0 +1,266 @@
+/* src/pages/WalletDetail.css o src/styles/WalletDetail.css - MODO OSCURO */
+
+/* --- Variables (Consistentes con el tema general y Navbar) --- */
+:root {
+  /* --- Heredadas/Inspiradas por Navbar.css y WalletList.css --- */
+  --app-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --accent-yellow: #fcd34d; /* Amarillo Binance */
+  --accent-yellow-rgb: 252, 211, 77; /* Para usar en rgba */
+
+  /* --- Específicas de la Página WalletDetail (Modo Oscuro) --- */
+  --page-bg: #181a20; /* Fondo oscuro principal de la página (de WalletList) */
+  --card-bg: #252830; /* Fondo oscuro para las tarjetas (de WalletList) */
+  --card-bg-rgb: 37, 40, 48; /* RGB para usar en rgba */
+  --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Sombra para modo oscuro (de WalletList) */
+  --card-hover-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Sombra más pronunciada al pasar el mouse */
+  --card-border-radius: 8px; /* Mantenemos el radio del modo claro */
+  --card-border-color: #374151; /* Borde sutil para tarjetas en modo oscuro (de WalletList) */
+
+  --text-primary: #f0f0f0; /* Texto principal claro para fondos oscuros (de WalletList) */
+  --text-secondary: #a0a3af; /* Texto secundario (de WalletList) */
+  --text-tertiary: #888c99; /* Para detalles menos importantes, un poco más tenue que el secundario */
+
+  --positive-color: #27ae60; /* Verde vibrante (mantenemos) */
+  --positive-color-rgb: 39, 174, 96;
+  --positive-bg-dark-theme: rgba(var(--positive-color-rgb), 0.15); /* Fondo verde oscuro y sutil */
+
+  --negative-color: #e74c3c; /* Rojo claro (mantenemos) */
+  --negative-color-rgb: 231, 76, 60;
+  --negative-bg-dark-theme: rgba(var(--negative-color-rgb), 0.15); /* Fondo rojo oscuro y sutil */
+
+  --section-border-color: #374151; /* Color para bordes separadores, igual que card-border-color (de WalletList) */
+}
+
+/* --- Estilos base para el cuerpo --- */
+body {
+  font-family: var(--app-font);
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* --- Contenedor Principal de WalletDetail --- */
+.wallet-detail-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: var(--page-bg); /* Ya es oscuro, pero lo mantenemos por si se anida */
+}
+
+/* --- Título de la Página --- */
+.wallet-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary); /* Texto claro */
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent-yellow);
+  display: inline-block;
+}
+
+.wallet-title .wallet-id-highlight {
+  color: var(--accent-yellow);
+  font-weight: 700;
+}
+
+/* --- Secciones de Transacciones (Recibidas/Enviadas) --- */
+.transaction-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary); /* Texto claro */
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--section-border-color);
+}
+
+/* --- Lista de Transacciones --- */
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* --- Elemento de Transacción (Tarjeta) --- */
+.transaction-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: var(--card-border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.transaction-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.transaction-item p {
+  margin: 0;
+  color: var(--text-secondary); /* Texto secundario claro */
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.transaction-item p strong {
+  /* color: var(--text-primary); Texto primario para la etiqueta, o el terciario si se prefiere más sutil */
+  color: var(--text-tertiary); /* Etiquetas más sutiles */
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Estilos específicos para diferentes datos de la transacción */
+.transaction-item .tx-amount {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: right;
+}
+/* La etiqueta del monto (strong) tomará el color definido en 'transaction-item p strong' */
+/* El valor del monto (p) heredará el color de 'transaction-item.received/sent .tx-amount p' */
+.transaction-item .tx-amount p strong {
+    text-align: right;
+    width: 100%;
+}
+
+
+/* Estilo basado en el tipo de transacción (Recibida/Enviada) */
+.transaction-item.received {
+  border-left: 5px solid var(--positive-color);
+  background-image: linear-gradient(to right, var(--positive-bg-dark-theme) 0%, var(--card-bg) 30%);
+}
+.transaction-item.received .tx-amount p { /* Solo el valor del monto */
+  color: var(--positive-color); /* Mantenemos el color verde brillante */
+}
+
+.transaction-item.sent {
+  border-left: 5px solid var(--negative-color);
+  background-image: linear-gradient(to right, var(--negative-bg-dark-theme) 0%, var(--card-bg) 30%);
+}
+.transaction-item.sent .tx-amount p { /* Solo el valor del monto */
+  color: var(--negative-color); /* Mantenemos el color rojo brillante */
+}
+
+/* --- Estilo para la Fecha --- */
+.tx-date p { /* Valor de la fecha */
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+.tx-date p strong { /* Etiqueta "Fecha:" */
+    color: var(--text-tertiary); /* Mismo color que el valor para consistencia */
+}
+
+/* --- Mensaje para cuando no hay transacciones --- */
+.no-transactions-message {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: var(--card-bg); /* Fondo de tarjeta oscuro */
+  border: 1px dashed var(--card-border-color); /* Borde oscuro */
+  border-radius: var(--card-border-radius);
+  margin-top: 1rem;
+}
+
+
+/* --- Ajustes Responsivos (se mantienen igual ya que son estructurales) --- */
+@media (max-width: 768px) {
+  .wallet-detail-container {
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+  }
+
+  .wallet-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .transaction-item {
+    padding: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  .transaction-item .tx-type {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  .transaction-item .tx-amount {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    text-align: right;
+  }
+   .transaction-item .tx-peer {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+  }
+   .transaction-item .tx-date {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    text-align: left;
+  }
+   .transaction-item .tx-date p strong {
+    display: inline;
+    margin-bottom: 0;
+  }
+   .transaction-item .tx-date p {
+    display: inline;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-detail-container {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+  .transaction-item {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .transaction-item .tx-amount,
+  .transaction-item .tx-type,
+  .transaction-item .tx-peer,
+  .transaction-item .tx-date {
+    grid-column: auto;
+    grid-row: auto;
+    text-align: left;
+  }
+  .transaction-item p strong {
+    display: inline-block;
+    margin-right: 0.3rem;
+    margin-bottom: 0.1rem;
+    width: auto;
+  }
+   .transaction-item p {
+    display: inline;
+  }
+  .transaction-item .tx-amount p { /* Valor del monto en móvil */
+    font-size: 1.05rem;
+  }
+  .transaction-item .tx-amount p strong { /* Etiqueta del monto en móvil */
+      display: block;
+      text-align: left;
+  }
+  .transaction-item .tx-amount p { /* El valor del monto en móvil */
+      display: block;
+      text-align: left;
+  }
+}

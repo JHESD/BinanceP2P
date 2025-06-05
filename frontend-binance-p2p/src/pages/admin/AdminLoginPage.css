@@ -1,0 +1,105 @@
+/* src/pages/auth/AdminLoginPage.css */
+:root {
+  --admin-bg: #131517;
+  --admin-card-bg: #1f1f23;
+  --admin-text: #e5e7eb;
+  --admin-accent: #ef4444;
+  --admin-accent-hover: #dc2626;
+  --admin-input-bg: #2b2f36;
+  --admin-input-border: #4b5563;
+  --admin-shadow: rgba(0, 0, 0, 0.4);
+  --admin-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: var(--admin-font);
+}
+
+.admin-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--admin-bg);
+  padding: 1.5rem;
+}
+
+.admin-login-card {
+  background-color: var(--admin-card-bg);
+  color: var(--admin-text);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px var(--admin-shadow);
+  width: 100%;
+  max-width: 400px;
+}
+
+.admin-login-title {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--admin-accent);
+}
+
+.admin-error-banner {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--admin-accent);
+  color: var(--admin-accent);
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-label {
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.admin-input {
+  background-color: var(--admin-input-bg);
+  color: var(--admin-text);
+  border: 1px solid var(--admin-input-border);
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+.admin-submit-button {
+  background-color: var(--admin-accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.admin-submit-button:hover {
+  background-color: var(--admin-accent-hover);
+}
+
+.admin-submit-button:active {
+  transform: scale(0.97);
+}

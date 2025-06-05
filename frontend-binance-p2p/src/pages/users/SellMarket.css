@@ -1,0 +1,145 @@
+/* src/components/market/SellMarket.css o src/styles/SellMarket.css - MODO OSCURO */
+
+/* --- Variables (Heredadas/Consistentes) --- */
+/* Estas variables se asume que están disponibles globalmente o se repiten desde BuyMarket.css */
+/* Si este archivo es completamente independiente, copia las :root {} definitions de BuyMarket.css aquí. */
+:root {
+  --app-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --page-bg: #181a20;
+  --card-bg: #252830;
+  --card-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  --card-hover-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  --card-border-color: #374151;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a3af;
+  --text-tertiary: #888c99;
+  --accent-yellow: #fcd34d;
+  --primary-action-color: #2563eb;
+  --primary-action-hover-color: #1d4ed8;
+  --primary-action-text-color: #ffffff;
+  --nav-height: 68px;
+  --text-primary-rgb: 240, 240, 240; /* Para fondos de imagen sutiles */
+}
+
+
+/* --- Contenedor Principal de SellMarket --- */
+.sell-market-container { /* Cambiamos el nombre para especificidad */
+  padding: 2rem;
+  background-color: var(--page-bg);
+  color: var(--text-primary);
+  min-height: calc(100vh - var(--nav-height, 68px));
+  font-family: var(--app-font);
+}
+
+/* --- Estilos Reutilizados de BuyMarket.css --- */
+/* Si estos estilos son idénticos, considera ponerlos en un archivo CSS común */
+
+.create-ad-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.button-base {
+  color: var(--primary-action-text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.button-primary {
+  background-color: var(--primary-action-color);
+}
+.button-primary:hover {
+  background-color: var(--primary-action-hover-color);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.ads-grid {
+  /* Tailwind maneja esto en el JSX. Si se quitan las clases de Tailwind: */
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  gap: 1.5rem;
+}
+
+.ad-card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  min-height: 280px; /* Ajustado para que no haya paymentImage */
+}
+
+.ad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.ad-card-content {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.ad-currency-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.ad-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ad-details {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: 0.5rem;
+}
+.ad-details strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* No hay .ad-payment-image en SellMarket.jsx, así que no es necesario ese estilo aquí */
+
+.ad-view-details-button {
+  margin-top: auto;
+}
+.ad-view-details-button .lucide {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.no-ads-message {
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--card-bg);
+  border: 1px dashed var(--card-border-color);
+  border-radius: 12px;
+  margin-top: 2rem;
+}

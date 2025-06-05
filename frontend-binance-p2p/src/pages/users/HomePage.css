@@ -1,0 +1,142 @@
+/* styles/HomePage.css */
+
+/* Variables de color (inspiradas en tu Navbar y Binance) */
+:root {
+  --primary-bg: #181a20; /* Un poco más oscuro que el navbar para contraste, o #1f2937 si quieres exacto */
+  --card-bg: #1f2937; /* Coincide con el navbar o un gris oscuro ligeramente más claro que --primary-bg */
+  --text-primary: #f0f0f0; /* Texto principal claro */
+  --text-secondary: #a0a3af; /* Texto secundario, un poco más apagado */
+  --accent-color: #fcd34d; /* Amarillo Binance */
+  --border-color: #374151; /* Borde sutil, similar al hover del navbar */
+  --positive-color: #0ecb81; /* Verde Binance */
+  --negative-color: #f6465d; /* Rojo Binance */
+  --shadow-color: rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
+  --shadow-color-light: rgba(0, 0, 0, 0.15); /* Sombra sutil */
+}
+
+.homepage-container {
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Heredado de UserNav */
+  min-height: calc(100vh - 60px); /* Ajusta 60px a la altura de tu navbar si es necesario */
+}
+
+.homepage-title {
+  color: var(--accent-color); /* Título principal destacado con el color de acento */
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+  text-align: center; /* Opcional: centrar el título principal */
+  margin-bottom: 2rem !important; /* Tailwind 'space-y-10' podría ser muy grande para el título */
+}
+
+.section-title {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem !important; /* Ajusta el mb-4 de Tailwind si es necesario */
+}
+
+/* Estilo de las tarjetas de mercado */
+.market-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Bordes redondeados consistentes */
+  padding: 1.25rem; /* Tailwind p-4 es 1rem, un poco más de espacio */
+  box-shadow: 0 4px 10px var(--shadow-color-light);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px var(--shadow-color);
+}
+
+.market-card .coin-name {
+  color: var(--text-primary);
+  font-size: 1.3rem; /* Ligeramente más grande */
+  margin-bottom: 0.5rem;
+}
+
+.market-card .coin-ticker {
+  color: var(--text-secondary);
+  font-weight: normal;
+  font-size: 0.9em; /* Relativo al coin-name */
+}
+
+.market-card .coin-value {
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+.market-card .coin-value strong {
+  color: var(--text-primary); /* Valor numérico más destacado */
+  font-weight: 600;
+}
+
+.market-card .coin-variation {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.text-positive {
+  color: var(--positive-color) !important; /* Importante para sobrescribir clases de Tailwind si es necesario */
+}
+
+.text-negative {
+  color: var(--negative-color) !important;
+}
+
+.market-card .coin-stats {
+  color: var(--text-secondary);
+  font-size: 0.85rem; /* Un poco más pequeño */
+}
+.market-card .coin-stats p {
+  margin-bottom: 0.15rem;
+}
+.market-card .coin-stats strong {
+  color: var(--text-primary);
+}
+
+/* Sección de Consejos */
+.advice-section .section-title {
+  margin-top: 2rem; /* Más espacio antes de la sección de consejos */
+}
+
+.advice-list {
+  color: var(--text-secondary); /* Color base para los items de la lista */
+  padding-left: 1.5rem; /* Espacio para los bullets */
+}
+
+.advice-list li {
+  padding: 0.3rem 0;
+  margin-bottom: 0.5rem !important; /* Ajusta space-y-1 de Tailwind */
+  position: relative;
+}
+
+/* Estilo de los bullets de la lista (usando los ::marker de Tailwind) */
+.advice-list li::marker {
+  color: var(--accent-color);
+  font-size: 1.1em;
+}
+
+/* Ajustes responsivos (opcional, Tailwind ya maneja mucho) */
+@media (max-width: 768px) {
+  .homepage-title {
+    font-size: 1.5rem; /* Ajusta el text-2xl de Tailwind */
+  }
+  .section-title {
+    font-size: 1.15rem; /* Ajusta el text-xl de Tailwind */
+  }
+  .market-card {
+    padding: 1rem;
+  }
+  .market-card .coin-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Tailwind sm:grid-cols-2 anula grid-cols-1. Si quieres 1 columna en muy pequeños: */
+  .market-section .grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

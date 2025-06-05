@@ -1,0 +1,226 @@
+/* components/shared/Navbar.css */
+
+/* --- Variables (Consistentes con el tema general) --- */
+:root {
+  --nav-bg: #1f2937; /* Fondo del Navbar */
+  --nav-text-primary: #f9fafb; /* Texto principal (logo) */
+  --nav-text-secondary: #d1d5db; /* Color de enlaces */
+  --nav-accent: #fcd34d; /* Amarillo Binance */
+  --nav-hover-bg: #374151; /* Fondo de hover para enlaces */
+  --nav-active-bg: #2c3a4e; /* Fondo sutil para enlace activo */
+
+  /* Para el botón de logout, usando el rojo que establecimos antes */
+  --nav-logout-text: #f9fafb;
+  --nav-logout-bg: var(--negative-color, #f6465d); /* Usar variable global si está definida */
+  --nav-logout-hover-bg: var(--negative-color-darker, #dc2626); /* Un rojo más oscuro */
+  
+  --nav-border-subtle: #4b5563; /* Para separadores en menú móvil */
+  --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --nav-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --nav-height: 68px; /* Altura de la barra de navegación */
+}
+
+/* --- Estructura Principal del Navbar --- */
+.user-nav-horizontal {
+  background-color: var(--nav-bg);
+  color: var(--nav-text-primary);
+  width: 100%;
+  height: var(--nav-height);
+  padding: 0 2rem; /* Padding horizontal */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--nav-shadow);
+  font-family: var(--nav-font);
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Alto z-index para estar por encima de todo */
+}
+
+/* --- Logo --- */
+.user-nav-logo .logo-link { /* Clase añadida en el JSX */
+  text-decoration: none;
+  display: flex; /* Para alinear si el logo fuera más complejo */
+  align-items: center;
+}
+
+.user-nav-logo .logo-highlight {
+  color: var(--nav-accent);
+  font-size: 1.5rem; /* Ligeramente más grande */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.user-nav-logo .logo-sub {
+  color: #9ca3af;
+  font-size: 0.8em; /* Relativo al logo-highlight */
+  margin-left: 0.3rem;
+  font-weight: 500;
+  text-transform: none; /* Quitar uppercase si no se desea */
+  letter-spacing: normal;
+}
+
+/* --- Enlaces de Navegación (Escritorio) --- */
+.user-nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Reducir un poco el gap si aumentamos padding de 'a' */
+  margin: 0;
+  padding: 0;
+}
+
+.user-nav-links li {
+  display: flex; /* Para que el botón de logout se alinee bien */
+}
+
+.user-nav-links a,
+.user-nav-links .logout-button { /* Aplicar padding uniforme */
+  color: var(--nav-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1rem; /* Padding más generoso */
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  display: flex; /* Para alinear iconos y texto si los tuvieras */
+  align-items: center;
+  gap: 0.5em; /* Espacio entre emoji/icono y texto */
+  white-space: nowrap; /* Evitar que el texto del enlace se parta */
+}
+
+.user-nav-links a:hover {
+  background-color: var(--nav-hover-bg);
+  color: var(--nav-accent);
+}
+
+.user-nav-links a.active {
+  background-color: var(--nav-active-bg);
+  color: var(--nav-accent);
+  font-weight: 600; /* Un poco más de énfasis */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); /* Sombra interna sutil */
+}
+
+/* --- Botón de Logout --- */
+.logout-button {
+  background-color: transparent; /* Fondo transparente por defecto */
+  border: 1px solid var(--nav-logout-bg); /* Borde con color de logout */
+  color: var(--nav-logout-bg); /* Texto con color de logout */
+  font-weight: 500; /* Ajuste para que coincida con otros enlaces */
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: var(--nav-logout-bg);
+  color: var(--nav-logout-text);
+  border-color: var(--nav-logout-bg); /* Asegurar que el borde no desaparezca */
+}
+
+/* --- Icono Hamburguesa --- */
+.menu-toggle {
+  display: none; /* Oculto en escritorio */
+  flex-direction: column;
+  justify-content: space-around; /* Distribuye las barras */
+  width: 30px; /* Tamaño del icono */
+  height: 24px; /* Altura total de las barras */
+  cursor: pointer;
+  padding: 0; /* Quitar padding si lo hubiera */
+  background: transparent;
+  border: none;
+}
+
+.menu-toggle div {
+  width: 100%;
+  height: 3px;
+  background-color: var(--nav-text-primary);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); /* Transición suave */
+  transform-origin: center; /* Origen de la transformación */
+}
+
+/* Animación del icono hamburguesa a 'X' */
+.menu-toggle.active div:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg); /* Ajusta 7.5px a la mitad del espacio entre barras */
+}
+
+.menu-toggle.active div:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-100%); /* Desaparecer la barra del medio */
+}
+
+.menu-toggle.active div:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+
+/* --- Diseño Responsivo (Menú Móvil) --- */
+@media (max-width: 992px) { /* Ajustar este breakpoint según sea necesario (antes 768px) */
+  .user-nav-horizontal {
+    padding: 0 1.5rem; /* Menos padding en móvil */
+  }
+  
+  .menu-toggle {
+    display: flex; /* Mostrar el icono hamburguesa */
+  }
+
+  .user-nav-links {
+    position: absolute;
+    top: var(--nav-height); /* Justo debajo del navbar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch; /* Los items ocupan todo el ancho */
+    background-color: var(--nav-bg); /* Mismo fondo que el navbar */
+    box-shadow: var(--nav-shadow); /* Sombra para destacar sobre el contenido */
+    padding: 1rem 0; /* Padding vertical para el contenedor del menú */
+    
+    /* Animación de entrada/salida */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                opacity 0.3s ease-in-out 0.1s, 
+                visibility 0s linear 0.4s;
+  }
+
+  .user-nav-links.show {
+    max-height: 100vh; /* Un valor suficientemente grande */
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.4s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                opacity 0.3s ease-in-out, 
+                visibility 0s linear 0s;
+  }
+
+  .user-nav-links li {
+    width: 100%;
+  }
+
+  .user-nav-links a,
+  .user-nav-links .logout-button {
+    padding: 1rem 1.5rem; /* Padding para enlaces móviles */
+    width: 100%;
+    border-radius: 0; /* Sin bordes redondeados en items de lista completa */
+    text-align: left;
+    border-bottom: 1px solid var(--nav-border-subtle); /* Separador sutil */
+  }
+  .user-nav-links li:last-child a,
+  .user-nav-links li:last-child .logout-button {
+    border-bottom: none; /* Quitar borde del último elemento */
+  }
+
+  .user-nav-links a.active {
+    /* Mantener el estilo de activo, pero sin la sombra interna quizás */
+    box-shadow: none;
+    background-color: var(--nav-active-bg); /* Puede ser un poco más pronunciado en móvil */
+    color: var(--nav-accent);
+  }
+  
+  .logout-button { /* Botón de logout en móvil */
+     /* Ya se aplica el width 100% por la regla anterior */
+     margin-top: 0; /* Quitar margen si lo tenía */
+     /* El estilo de borde y color ya está definido */
+  }
+}

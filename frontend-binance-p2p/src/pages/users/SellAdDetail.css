@@ -1,0 +1,93 @@
+/* src/components/market/SellAdDetail.css - MODO OSCURO MODERNO */
+
+/* Hereda las mismas variables de BuyAdDetail.css */
+
+.sell-detail-container {
+  padding: 2rem;
+  max-width: 48rem;
+  margin: 2rem auto;
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border-color);
+  font-family: var(--app-font);
+}
+
+.sell-detail-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--card-border-color);
+  padding-bottom: 0.75rem;
+}
+
+.sell-info-item {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.sell-info-item strong {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  min-width: 140px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.sell-info-item span {
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.sell-payment-image-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border-color);
+}
+
+.sell-payment-image-section img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--card-border-color);
+  background-color: rgba(var(--text-primary-rgb), 0.03);
+}
+
+.sell-receipt-form {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border-color);
+}
+
+.sell-receipt-form h3 {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.sell-receipt-form input[type="file"] {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.sell-receipt-form button {
+  background-color: var(--primary-action-color);
+  color: var(--primary-action-text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.sell-receipt-form button:hover {
+  background-color: var(--primary-action-hover-color);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}

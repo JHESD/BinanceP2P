@@ -1,0 +1,157 @@
+/* src/components/market/BuyAdDetail.css o src/styles/BuyAdDetail.css - MODO OSCURO */
+
+/* --- Variables (Heredadas/Consistentes) --- */
+:root {
+  /* Heredadas de los estilos anteriores */
+  --app-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --page-bg: #181a20;
+  --card-bg: #252830; /* El detalle del anuncio se presentará en un contenedor tipo tarjeta */
+  --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra un poco más pronunciada para el detalle principal */
+  --card-border-color: #374151;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a3af;
+  --text-tertiary: #888c99; /* Usado para etiquetas o texto menos prominente */
+  --accent-yellow: #fcd34d;
+  --primary-action-color: #2563eb;
+  --primary-action-hover-color: #1d4ed8;
+  --primary-action-text-color: #ffffff;
+  --negative-color: #e74c3c; /* Para mensajes de error */
+  --text-primary-rgb: 240, 240, 240; /* Para rgba en fondos de imagen */
+  --nav-height: 68px; /* Asumiendo una altura de navbar */
+}
+
+/* --- Estilos para estados de carga y error --- */
+.ad-detail-status-container {
+  padding: 3rem 1rem; /* Más padding vertical */
+  text-align: center;
+  color: var(--text-secondary);
+  min-height: calc(100vh - var(--nav-height, 68px) - 6rem); /* Ajustar para centrado vertical */
+  display: flex;
+  flex-direction: column; /* Para alinear texto adicional si es necesario */
+  align-items: center;
+  justify-content: center;
+  font-family: var(--app-font);
+  background-color: var(--page-bg); /* Asegura que toda la página tenga el fondo oscuro */
+}
+
+.ad-detail-error-message {
+  color: var(--negative-color);
+  font-weight: 500;
+}
+
+/* --- Contenedor Principal del Detalle del Anuncio --- */
+.ad-detail-container {
+  padding: 2rem; /* Tailwind p-6 es 1.5rem, p-8 es 2rem */
+  max-width: 48rem; /* Tailwind max-w-2xl es 42rem, max-w-3xl es 48rem. Ajustado. */
+  margin: 2rem auto; /* Centrado y con margen superior/inferior */
+  background-color: var(--card-bg);
+  border-radius: 16px; /* Tailwind rounded-2xl */
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border-color);
+  font-family: var(--app-font); /* Asegurar la fuente dentro del contenedor */
+}
+
+/* --- Título del Detalle --- */
+.ad-detail-title {
+  font-size: 1.75rem; /* Tailwind text-2xl es 1.5rem. Un poco más grande. */
+  font-weight: 700; /* Tailwind font-bold */
+  color: var(--text-primary);
+  margin-bottom: 1.5rem; /* Tailwind mb-4 */
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+/* --- Sección de Información del Anuncio --- */
+.ad-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Tailwind space-y-3 es 0.75rem. Ajustado. */
+}
+
+.ad-info-item {
+  color: var(--text-secondary);
+  font-size: 1rem; /* Tamaño base para la información */
+  line-height: 1.7; /* Buena legibilidad */
+  display: flex; /* Para alinear etiqueta y valor si es necesario */
+  flex-wrap: wrap; /* Permite que el valor pase a la siguiente línea en espacios pequeños */
+}
+
+.ad-info-item strong {
+  color: var(--text-tertiary); /* Etiquetas un poco más sutiles */
+  font-weight: 500; /* Un poco menos fuerte que bold */
+  margin-right: 0.75rem;
+  display: inline-block;
+  min-width: 140px; /* Ancho mínimo para las etiquetas, ayuda a alinear visualmente */
+  flex-shrink: 0; /* Evita que la etiqueta se encoja */
+}
+
+.ad-info-item span { /* Contenedor para el valor, si se usa */
+  color: var(--text-primary); /* El valor con el color primario de texto */
+  word-break: break-word; /* Evita desbordamientos */
+}
+
+/* --- Sección de Imagen de Método de Pago --- */
+.ad-payment-image-section {
+  margin-top: 1.5rem; /* Tailwind mt-4 */
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border-color);
+}
+
+.ad-payment-image-label {
+  margin-bottom: 0.75rem; /* Tailwind mb-1, ajustado */
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.ad-payment-image-display {
+  max-width: 100%; /* Ocupa el ancho disponible sin excederlo */
+  /* max-width: 32rem; /* Tailwind max-w-md. Podrías usar esto si prefieres un tamaño fijo máximo */
+  border-radius: 8px;
+  border: 1px solid var(--card-border-color);
+  background-color: rgba(var(--text-primary-rgb), 0.03); /* Fondo muy sutil para la imagen */
+  display: block; /* Evita espacio extra debajo de la imagen */
+}
+
+/* --- Sección del Botón de Chat --- */
+.ad-chat-button-section {
+  margin-top: 2rem; /* Tailwind mt-6 */
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border-color);
+  display: flex;
+  /* justify-content: flex-start;  O center, flex-end según preferencia */
+}
+
+/* Los botones .button-base y .button-primary ya están definidos en BuyMarket.css */
+/* Si este CSS es independiente, necesitarías copiarlos aquí. */
+/* Si se cargan globalmente o junto con BuyMarket.css, no hace falta redeclararlos. */
+
+.ad-chat-button .lucide { /* Estilo para el ícono lucide en este botón específico */
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Reutilizar estilos de botón de BuyMarket.css (asumiendo que se carga) */
+/* Si no, descomenta y pega las definiciones de .button-base y .button-primary aquí */
+/*
+.button-base {
+  color: var(--primary-action-text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.button-primary {
+  background-color: var(--primary-action-color);
+}
+.button-primary:hover {
+  background-color: var(--primary-action-hover-color);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+*/

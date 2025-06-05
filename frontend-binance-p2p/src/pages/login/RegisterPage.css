@@ -1,0 +1,198 @@
+/* src/pages/auth/RegisterPage.css */
+
+/* Reutilizamos las mismas variables globales para consistencia */
+/* Asegúrate que estas variables estén definidas globalmente o cópialas aquí si es necesario */
+:root {
+  --primary-bg: #181a20;
+  --card-bg: #252830;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a3af;
+  --accent-color: #fcd34d;
+  --border-color: #374151;
+  --input-bg: #1f2937;
+  --input-border-focus: var(--accent-color);
+  
+  --negative-color: #f6465d;
+  --negative-color-rgb: 246, 70, 93; /* Para opacidad */
+
+  --positive-color: #0ecb81; /* Verde Binance que definimos en HomePage */
+  --positive-color-rgb: 14, 203, 129; /* Para opacidad */
+
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos base del cuerpo y HTML (pueden estar en un CSS global) */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background-color: var(--primary-bg);
+}
+
+/* Contenedor principal de la página de registro */
+.register-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background-color: var(--primary-bg); /* Heredado, pero explícito por si acaso */
+  font-family: var(--font-main);
+}
+
+/* Tarjeta de registro */
+.register-card {
+  background-color: var(--card-bg);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  width: 100%;
+  max-width: 450px; /* Puede ser un poco más ancha si prefieres para 3 campos */
+  color: var(--text-primary);
+}
+
+/* Encabezado dentro de la tarjeta */
+.register-header {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Un poco menos si hay mensajes de error/éxito frecuentes */
+}
+
+.app-title { /* Idéntico a LoginPage.css */
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.app-title-main { /* Idéntico a LoginPage.css */
+  color: var(--accent-color);
+}
+
+.app-title-sub { /* Idéntico a LoginPage.css */
+  color: var(--text-secondary);
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.form-title { /* Idéntico a LoginPage.css */
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
+}
+
+/* Banners de mensajes */
+.error-banner, .success-banner {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.25rem; /* Espacio consistente */
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.error-banner {
+  background-color: rgba(var(--negative-color-rgb, 246, 70, 93), 0.1);
+  color: var(--negative-color);
+  border: 1px solid var(--negative-color);
+}
+
+.success-banner {
+  background-color: rgba(var(--positive-color-rgb, 14, 203, 129), 0.1);
+  color: var(--positive-color);
+  border: 1px solid var(--positive-color);
+}
+
+/* Formulario y sus elementos */
+.register-form .input-group { /* Idéntico a LoginPage.css */
+  margin-bottom: 1.25rem;
+}
+
+.input-label { /* Idéntico a LoginPage.css */
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.form-input { /* Idéntico a LoginPage.css */
+  width: 100%;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input::placeholder { /* Idéntico a LoginPage.css */
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.form-input:focus { /* Idéntico a LoginPage.css */
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.3);
+}
+
+.submit-button { /* Idéntico a LoginPage.css */
+  width: 100%;
+  background-color: var(--accent-color);
+  color: #111;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover { /* Idéntico a LoginPage.css */
+  background-color: #e0b020;
+}
+.submit-button:active { /* Idéntico a LoginPage.css */
+  transform: scale(0.98);
+}
+
+.alternative-action { /* Idéntico a LoginPage.css */
+  text-align: center;
+  margin-top: 1.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.alternative-action .link-highlight { /* Idéntico a LoginPage.css */
+  color: var(--accent-color);
+  font-weight: 500;
+  text-decoration: none; /* Para cuando es un <a> */
+}
+
+.alternative-action .link-highlight:hover { /* Idéntico a LoginPage.css */
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* Estilo para el botón que parece un enlace */
+.button-as-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0; /* Ajusta según sea necesario para alineación con el texto */
+  margin-left: 0.25rem; /* Pequeño espacio respecto al texto precedente */
+  color: var(--accent-color); /* Hereda el color del link-highlight */
+  font: inherit; /* Hereda la fuente del párrafo .alternative-action */
+  font-weight: 500; /* Puede ser igual al link-highlight */
+  cursor: pointer;
+  text-decoration: none; /* Puede o no tener subrayado inicialmente */
+}
+
+.button-as-link:hover {
+  text-decoration: underline;
+  color: #fff; /* Mismo hover que link-highlight */
+}
