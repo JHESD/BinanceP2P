@@ -7,24 +7,31 @@ import './AdminLoginPage.css';
 function AdminLoginPage() {
     const { login } = useAuth();
     const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
+
         if (!email || !password) {
             setError("Todos los campos son obligatorios.");
             return;
         }
 
         try {
+            setLoading(true);
             const { token } = await loginAdmin(email, password);
+
             login(token, true);
-            navigate("/admin");
+            navigate("/admin/dashboard");
         } catch (err) {
             setError(err.response?.data?.message || "Error al iniciar sesión como administrador");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -32,6 +39,7 @@ function AdminLoginPage() {
         <div className="admin-login-container">
             <div className="admin-login-card">
                 <h2 className="admin-login-title">Panel Administrativo</h2>
+
                 {error && <div className="admin-error-banner">{error}</div>}
 
                 <form onSubmit={handleLogin} className="admin-login-form">
@@ -55,8 +63,8 @@ function AdminLoginPage() {
                         required
                     />
 
-                    <button type="submit" className="admin-submit-button">
-                        Iniciar como Admin
+                    <button type="submit" className="admin-submit-button" disabled={loading}>
+                        {loading ? "Cargando..." : "Iniciar como Admin"}
                     </button>
                 </form>
             </div>

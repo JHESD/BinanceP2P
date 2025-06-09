@@ -1,0 +1,194 @@
+/* src/components/admin/AdminDashboard.css */
+
+/* --- Contenedor Principal del Dashboard --- */
+.admin-dashboard {
+  padding: 2rem;
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: var(--admin-font);
+  min-height: calc(100vh - 65px); /* Ajustar 65px a la altura de tu navbar */
+}
+
+/* --- Encabezado del Dashboard --- */
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  margin: 0;
+}
+
+.dashboard-header p {
+  font-size: 1rem;
+  color: #9ca3af; /* Un gris más suave para el subtítulo */
+  margin-top: 0.25rem;
+}
+
+/* --- Grid para las Tarjetas de Estadísticas --- */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--admin-card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--admin-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+/* --- Grid para el Contenido Principal --- */
+.dashboard-main-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Columna izquierda más ancha */
+  gap: 1.5rem;
+}
+
+/* Estilo base para las tarjetas del contenido principal */
+.dashboard-card {
+  background-color: var(--admin-card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--admin-input-border);
+  padding-bottom: 0.75rem;
+}
+
+/* --- Lista de Transacciones Recientes --- */
+.recent-transactions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-transactions-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid var(--admin-input-bg);
+  transition: background-color 0.2s ease;
+}
+
+.recent-transactions-list li:last-child {
+  border-bottom: none;
+}
+
+.recent-transactions-list li:hover {
+  background-color: var(--admin-input-bg);
+  border-radius: 4px;
+}
+
+.tx-info, .tx-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.tx-id { font-weight: 600; color: #fff; }
+.tx-user { color: #9ca3af; }
+.tx-amount { font-weight: 600; }
+
+/* --- Insignias de Estado --- */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  min-width: 90px;
+}
+
+.status-completed { background-color: #166534; color: #dcfce7; }
+.status-pending { background-color: #a16207; color: #fefce8; }
+.status-cancelled { background-color: var(--admin-accent-hover); color: #fee2e2; }
+
+
+/* --- Panel Lateral Derecho --- */
+.dashboard-side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- Acciones Rápidas --- */
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--admin-input-bg);
+  color: var(--admin-text);
+  padding: 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.action-button:last-child { margin-bottom: 0; }
+.action-button:hover {
+  background-color: var(--admin-accent);
+  color: #fff;
+}
+
+/* --- Estado del Sistema --- */
+.system-status-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.system-status-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+.system-status-list li span:first-child { font-weight: 500; }
+.system-status-list li span:last-child { color: #9ca3af; }
+
+/* --- Responsividad --- */
+@media (max-width: 992px) {
+  .dashboard-main-content {
+    grid-template-columns: 1fr; /* Apila las columnas */
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+  .dashboard-header h1 { font-size: 1.75rem; }
+  .dashboard-header p { font-size: 0.9rem; }
+}

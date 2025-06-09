@@ -22,16 +22,13 @@ export const getCurrencies = async () => {
 };
 
 export const getWalletHistory = async (walletId) => {
-    const response = await fetch(`/api/wallets/${walletId}/history`, {
-        headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-    });
+    if (!walletId) throw new Error("ID de billetera inválido");
 
-    if (!response.ok) throw new Error("No se pudo cargar el historial");
-
-    return await response.json();
+    const res = await axios.get(`${API}/wallets/${walletId}/history`, getAuthHeader());
+    return res.data;
 };
+
+
 
 export const createWallet = async (currencyId, balance) => {
     const res = await axios.post(`${API}/wallets`, {

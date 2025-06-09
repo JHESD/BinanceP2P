@@ -1,26 +1,14 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import CurrencyManager from "./CurrencyManager";
-import UserManager from "./UserManager";
-import AdminDashboard from "../../pages/admin/AdminDashboard";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-const isAdmin = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user && user.role === "admin";
-};
+const AdminRoute = ({ children }) => {
+    const { user } = useAuth();
 
-const AdminRoute = () => {
-    if (!isAdmin()) {
-        return <Navigate to="/admin" replace />;
+    if (!user || !user.isAdmin) {
+        return <Navigate to="/admin/login" replace />;
     }
 
-    return (
-        <Routes>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="currencies" element={<CurrencyManager />} />
-            <Route path="users" element={<UserManager />} />
-        </Routes>
-    );
+    return children;
 };
 
 export default AdminRoute;

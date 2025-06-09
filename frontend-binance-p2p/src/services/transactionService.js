@@ -53,6 +53,7 @@ export const cancelTransaction = async (transactionId) => {
 };
 
 export const transferBetweenWallets = async ({ walletFromId, walletToId, amount, description }) => {
+    
     const res = await axios.post(`${API}/transactions/transferir`, {
         walletFromId,
         walletToId,

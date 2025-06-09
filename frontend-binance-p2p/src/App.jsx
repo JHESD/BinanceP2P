@@ -6,6 +6,7 @@ import RegisterPage from "./pages/login/RegisterPage";
 import UserDashboard from "./pages/users/UserDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./components/admin/AdminRoute";
+import AdminLayout from "./components/admin/AdminLayout";
 
 import PrivateRoute from "./components/auth/PrivateRoute";
 import HomePage from "./pages/users/HomePage";
@@ -33,27 +34,16 @@ function App() {
         <Route path="/admin/login" element={<LoginAdminPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-        <Route path="/admin/dashboard" element={
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        } />
-        <Route path="/admin/currencies" element={
-          <AdminRoute>
-            <CurrencyManager />
-          </AdminRoute>
-        } />
-        <Route path="/admin/users" element={
-          <AdminRoute>
-            <UserManager />
-          </AdminRoute>
-        } />
+        <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="currencies" element={<CurrencyManager />} />
+          <Route path="users" element={<UserManager />} />
+        </Route>
 
         <Route path="/" element={<PrivateRoute><UserDashboard /></PrivateRoute>}>
           <Route path="home" element={<HomePage />} />
           <Route path="wallets" element={<WalletList />} />
-          <Route path="wallets/:id" element={<WalletDetail />} />
+          <Route path="wallets/:walletId" element={<WalletDetail />} />
           <Route path="buy" element={<BuyMarket />} />
           <Route path="buy/new" element={<CreateBuyAd />} />
           <Route path="buy/:id" element={<BuyAdDetail />} />

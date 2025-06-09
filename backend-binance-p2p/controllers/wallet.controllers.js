@@ -32,14 +32,16 @@ const getWalletHistory = async (req, res) => {
         return res.status(404).json({ message: 'Wallet no encontrada o no autorizada' });
     }
 
-    const sent = await Transaction.findAll({
+        const sent = await Transaction.findAll({
         where: { walletFromId: walletId },
-        include: [{ model: Wallet, as: 'toWallet' }]
+        include: [{ model: Wallet, as: 'toWallet' }],
+        order: [['createdAt', 'DESC']]
     });
 
     const received = await Transaction.findAll({
         where: { walletToId: walletId },
-        include: [{ model: Wallet, as: 'fromWallet' }]
+        include: [{ model: Wallet, as: 'fromWallet' }],
+        order: [['createdAt', 'DESC']]
     });
 
     res.status(200).json({ sent, received });

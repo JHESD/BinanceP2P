@@ -1,4 +1,4 @@
-const { Transaction, Ad, Wallet } = require('../models');
+const { Transaction, Ad, Wallet,Currency } = require('../models');
 
 const createPurchaseTransaction = async (req, res) => {
     const { adId, buyerWalletId } = req.body;
@@ -113,43 +113,59 @@ const cancelTransaction = async (req, res) => {
 };
 
 const transferBetweenWallets = async (req, res) => {
+    console.log('Contenido de req.user:', req.user);
     const { walletFromId, walletToId, amount, description } = req.body;
+    const userId = req.user.userId; // del middleware auth
+    console.log('Datos de la transferencia:', { walletFromId, walletToId, amount, description, userId });
+
+    if (!walletFromId || !walletToId || isNaN(amount) || Number(amount) <= 0) {
+        return res.status(400).json({ message: 'Parámetros inválidos' });
+    }
+
+    if (walletFromId === walletToId) {
+        return res.status(400).json({ message: 'Las billeteras deben ser diferentes' });
+    }
+
     try {
-        const fromWallet = await Wallet.findByPk(walletFromId);
-        const toWallet = await Wallet.findByPk(walletToId);
+        const fromWallet = await Wallet.findOne({ where: { id: walletFromId, userId } });
+        const toWallet = await Wallet.findOne({ where: { id: walletToId, userId } });
 
         if (!fromWallet || !toWallet) {
-            return res.status(404).json({ message: 'Billetera no encontrada' });
+            return res.status(404).json({ message: 'Billetera no encontrada o no autorizada' });
         }
 
         if (fromWallet.currencyId !== toWallet.currencyId) {
             const fromCurrency = await Currency.findByPk(fromWallet.currencyId);
             const toCurrency = await Currency.findByPk(toWallet.currencyId);
-            const amountInSus = amount * fromCurrency.valueEnSus;
+
+            const amountInSus = Number(amount) * fromCurrency.valueEnSus;
             const convertedAmount = amountInSus / toCurrency.valueEnSus;
-            if (fromWallet.balance < amount) {
+
+            if (fromWallet.balance < Number(amount)) {
                 return res.status(400).json({ message: 'Saldo insuficiente' });
             }
-            fromWallet.balance -= amount;
+
+            fromWallet.balance -= Number(amount);
             toWallet.balance += convertedAmount;
         } else {
-        if (fromWallet.balance < amount) {
-            return res.status(400).json({ message: 'Saldo insuficiente' });
-        }
-        fromWallet.balance -= amount;
-        toWallet.balance += amount;
+            if (fromWallet.balance < Number(amount)) {
+                return res.status(400).json({ message: 'Saldo insuficiente' });
+            }
+
+            fromWallet.balance -= Number(amount);
+            toWallet.balance += Number(amount);
         }
 
         await fromWallet.save();
         await toWallet.save();
 
         const transaction = await Transaction.create({
-        type: 'transferencia',
-        amount,
-        description,
-        walletFromId,
-        walletToId,
-        status: 'finalizada'
+            type: 'transferencia',
+            amount: Number(amount),
+            description: description || 'Transferencia entre billeteras',
+            walletFromId,
+            walletToId,
+            status: 'finalizada'
         });
 
         return res.status(201).json({ message: 'Transferencia realizada', transaction });
@@ -158,6 +174,7 @@ const transferBetweenWallets = async (req, res) => {
         return res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
 
 const createSellTransaction = async (req, res) => {
     const { adId, sellerWalletId } = req.body;

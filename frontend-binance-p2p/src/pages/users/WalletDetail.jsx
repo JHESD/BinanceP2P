@@ -4,13 +4,16 @@ import { getWalletHistory } from "../../services/walletService";
 import './WalletDetail.css';
 
 export default function WalletDetail() {
+
   const { walletId } = useParams();
+  console.log("Wallet ID desde params:", walletId);
   const [history, setHistory] = useState({ sent: [], received: [] });
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const data = await getWalletHistory(walletId);
+        console.log("Historial recibido:", data); // <--- AÑADE ESTO
         setHistory(data);
       } catch (error) {
         console.error("Error cargando historial:", error);
@@ -19,6 +22,8 @@ export default function WalletDetail() {
 
     fetchHistory();
   }, [walletId]);
+
+console.log("Wallet ID desde params:", walletId);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString(undefined, { 
