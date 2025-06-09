@@ -1,4 +1,3 @@
-// components/admin/AdminLayout.jsx
 import AdminNavBar from "./AdminNavBar";
 import { Outlet } from "react-router-dom";
 

@@ -1,8 +1,7 @@
-// src/components/admin/CurrencyManager.jsx
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import "./CurrencyManager.css"; // Importamos el nuevo CSS
+import "./CurrencyManager.css";
 
 const API = "http://localhost:3000/api";
 
@@ -69,7 +68,7 @@ const CurrencyManager = () => {
     const handleEdit = (currency) => {
         setForm({ name: currency.name, symbol: currency.symbol || '', valueInSus: currency.valueInSus });
         setEditingId(currency.id);
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Sube al formulario
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const handleDelete = async (id) => {
@@ -91,7 +90,6 @@ const CurrencyManager = () => {
             </header>
 
             <div className="currency-manager-layout">
-                {/* Columna del Formulario */}
                 <div className="form-column">
                     <div className="manager-card form-card">
                         <h3>{editingId ? "📝 Editando Moneda" : " Añadir Nueva Moneda"}</h3>

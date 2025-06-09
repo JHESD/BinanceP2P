@@ -1,7 +1,6 @@
-// src/components/admin/UsersManager.jsx
 import { useEffect, useState } from "react";
 import { listUsers, grantAdmin } from "../../services/userService";
-import "./UserManager.css"; // Importamos el nuevo CSS
+import "./UserManager.css";
 
 const UsersManager = () => {
     const [users, setUsers] = useState([]);
@@ -12,7 +11,6 @@ const UsersManager = () => {
         try {
             setLoading(true);
             const data = await listUsers();
-            // Ordenamos para mostrar los administradores primero
             const sortedUsers = data.sort((a, b) => b.isAdmin - a.isAdmin);
             setUsers(sortedUsers);
             setError(null);
@@ -25,11 +23,10 @@ const UsersManager = () => {
     };
 
     const handleGrantAdmin = async (userId) => {
-        // Confirmación antes de una acción importante
         if (window.confirm("¿Estás seguro de que quieres otorgar privilegios de administrador a este usuario?")) {
             try {
                 await grantAdmin(userId);
-                fetchUsers(); // Recargar la lista para ver el cambio
+                fetchUsers();
             } catch (error) {
                 console.error("Error al otorgar permisos", error);
                 alert("Hubo un error al intentar otorgar los permisos.");

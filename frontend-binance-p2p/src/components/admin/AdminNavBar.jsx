@@ -1,8 +1,7 @@
-// components/admin/AdminNavBar.jsx
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./AdminNavbar.css"; // Puedes basarte en Navbar.css del user
+import "./AdminNavbar.css";
 
 const AdminNavBar = () => {
     const { logout } = useAuth();
